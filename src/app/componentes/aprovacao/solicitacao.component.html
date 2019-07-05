@@ -1,0 +1,136 @@
+<div class="ie-basis">
+  <mat-card fxLayout="column" class="ie-basis"> 
+    <div fxFlex="100" fxLayout="row" class="ie-basis">
+      <form fxFlex="50" class="ie-basis">
+        <mat-form-field fxFlex="50" class="ie-basis">
+          <mat-label>Selecione um curso:</mat-label>
+          <mat-select [formControl]="cursoControl" (ngModelChange)="selecionaCurso($event)" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let curso of cursos" [value]="curso">
+              {{curso.codCurso}} - {{curso.nmCurso}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="cursoControl.hasError('required')">Por favor, selecione um curso</mat-error>
+          <mat-hint>{{cursoControl.value?.sound}}</mat-hint>
+        </mat-form-field>
+      </form>
+      <div fxFlex="50" fxLayoutAlign="center center" *ngIf="solicitacoes.length > 0" class="ie-basis">
+        <h2>Solicitação {{solicitacao.codSolicitacao}}</h2>
+      </div>
+    </div>
+    <form fxLayout="column" fxFlex="100" #solicitacaoForm="ngForm" class="ie-basis">
+      <div fxLayout="row" class="ie-basis" *ngIf="solicitacoes.length > 0" [ngStyle]="{'height': '65vh'}" fxLayoutGap="20px">
+        <div fxFlex.gt-sm="50" fxFlex.sm="100" fxLayout="row" class="ie-basis">
+          <fieldset [ngStyle]="{'overflow': 'auto'}"  fxFlex="100" fxLayout="column" fxLayoutGap="10px" class="ie-basis">
+            <legend>Atividade complementar</legend>
+            <app-loading></app-loading>
+            <mat-form-field>
+              <input matInput placeholder="Aluno" value="{{solicitacao.alunoNavigation.nmAluno}}"
+              ngControl="nomeAluno" name="nomeAluno" disabled>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput name="nomeCurso" placeholder="Curso" value="{{solicitacao.cursoNavigation.nmCurso}}" 
+              ngControl="nomeCurso" [(ngModel)]="solicitacao.cursoNavigation.nmCurso" required="true">
+            </mat-form-field>
+            <div fxLayout="row" fxLayoutGap="10px" fxFlex="100" fxLayoutAlign="center center" class="ie-basis">
+              <mat-form-field fxFlex="50" class="ie-basis">
+                <mat-label>Selecione um tipo:</mat-label>
+                <mat-select name="tipoSolicitacao" 
+                ngControl="tipoSolicitacao" [(ngModel)]="solicitacao.tipoCursoNavigation.id" required>
+                  <mat-option value="">--</mat-option>
+                  <mat-option *ngFor="let tipo of tiposCurso"  [value]="tipo.id">
+                    {{tipo.nmTipoCurso}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field fxFlex="33" class="ie-basis"> 
+                <input matInput #inputDataInicio
+                required = 'true'
+                [matDatepicker]="dataInicio"
+                placeholder="Data Início"
+                [(ngModel)]="solicitacao.dhInicio"
+                name="dhInicio" ngControl="dhInicio">
+                <mat-datepicker-toggle matSuffix [for]="dataInicio"></mat-datepicker-toggle>
+                <mat-datepicker #dataInicio></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field fxFlex="33" class="ie-basis">
+                <input matInput required = 'true' [matDatepicker]="picker2" placeholder="Data Fim" 
+                ngControl="dhFim" [(ngModel)]="solicitacao.dhFim" name="dhFim">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutGap="10%" fxFlex="100" class="ie-basis">
+                <mat-form-field fxFlex="45" class="ie-basis">
+                  <input matInput placeholder="Carga Horaria Certificado" 
+                  ngControl="horasSolicitadas" value="{{solicitacao.horasSolicitadas}}" name="horasSolicitadas" disabled>
+                </mat-form-field>
+                <mat-form-field fxFlex="45" class="ie-basis">
+                  <input matInput OnlyNumber="true" maxlength="3" required="true" 
+                  ngControl="horasDeferidas" placeholder="Carga Horaria Deferida" name="horasDeferidas" value="{{solicitacao.horasDeferidas}}" [(ngModel)]="solicitacao.horasDeferidas">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" class="example-container ie-basis" fxFlex="100">
+              <mat-card *ngIf="this.solicitacaoAtividadeLcs.length == 0" fxFlex="100" fxLayoutAlign="center center" class = "header-card">
+                <mat-card-content class="card-center">
+                  <span id="idNenhumaLista" aling *ngIf="this.solicitacaoAtividadeLcs.length == 0"> Nenhuma Atividade Cadastrada </span>
+                </mat-card-content>
+              </mat-card>              
+              <table *ngIf="this.solicitacaoAtividadeLcs.length > 0" mat-table [dataSource]="dataSource" class = "mat-elevation-z8">
+                <!-- Ano Column -->
+                <ng-container matColumnDef="anoAtividade">
+                  <th mat-header-cell *matHeaderCellDef> Ano </th>
+                  <td mat-cell *matCellDef="let element"> {{element.anoAtividade}} </td>
+                </ng-container>
+            
+                <!-- Descricao Column -->
+                <ng-container matColumnDef="dsAtividade">
+                  <th mat-header-cell *matHeaderCellDef> Descricao </th>
+                  <td mat-cell *matCellDef="let element"> {{element.atividadeNavigation.dsAtividade}} </td>
+                </ng-container>
+            
+                <!-- Carga Horaria Certificado Column -->
+                <ng-container matColumnDef="cargaHoraria">
+                  <th mat-header-cell *matHeaderCellDef> Carga Horaria Certificado </th>
+                  <td mat-cell *matCellDef="let element"> {{element.cargaHoraria}} </td>
+                </ng-container>
+            
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </div>
+          </fieldset>
+        </div>
+        <div class="ie-basis" fxFlex.gt-sm="50" fxFlex.sm="100" fxLayout="row" fxLayoutAlign="center center" *ngIf="solicitacoes.length > 0 && showImageViewer" style="height: 100%;">
+            <!-- <iframe [src]="imagemCertificado | safe" width='100%' height='100%' frameborder='0'></iframe> -->
+            <app-image-viewer *ngIf="showImageViewer" #viewer style="height: 100%;" class="ie-basis"
+            [images]="[urlImagem]"
+            [idContainer]="'idOnHTML'"
+            [primaryColor]="'#6b69d0'"
+            [loadOnInit]="true"></app-image-viewer> 
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px" fxFlex="100" fxLayoutGap="20px" *ngIf="solicitacoes.length > 0" class="ie-basis">
+          <div fxLayout="row" fxFlex="48" fxLayoutAlign="center center" class="ie-basis">
+              <div>
+                  <button (click)="mudaPagina(false)" mat-icon-button><mat-icon>arrow_left</mat-icon></button>
+                  {{page}} - {{solicitacoes.length}}
+                  <button (click)="mudaPagina(true)" mat-icon-button><mat-icon>arrow_right</mat-icon></button>
+              </div>
+          </div>
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px" fxFlex="100" *ngIf="solicitacoes.length > 0" class="ie-basis">
+        <div fxLayout="row" fxFlex="50" class="ie-basis">
+            <div fxLayoutAlign="start" fxFlex="50" class="ie-basis">
+                <button mat-button class="btn btn-primary" (click)="deferir(false)" [disabled]="!solicitacaoForm.form.valid">Indeferir</button>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="start end" fxFlex.gt-sm="50%" fxFlex.sm="50%" class="ie-basis">
+                <button mat-button class="btn btn-success" [disabled]="!solicitacaoForm.form.valid" (click)="deferir(true)">Deferir</button>
+            </div>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>

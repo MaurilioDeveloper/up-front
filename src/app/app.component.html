@@ -1,0 +1,79 @@
+<div fxLayout="column" fxFlex="100">
+  <app-loading></app-loading>
+  <app-header *ngIf="router.url !== '/login' && router.url !==  '/'" class="ie-basis" fxLayout="row" fxFlex.gt-sm="100" fxFlex="100"></app-header>
+  <!-- <div fxFlex="100" fxLayout="row" *ngIf="router.url === '/home'">
+    <app-aprovacao fxLayout="column" fxLayoutGap="20px" fxFlex.gt-sm="100" fxFlex="100"></app-aprovacao>
+  </div> -->
+  <router-outlet></router-outlet>
+</div>
+<!--<div>
+  <mat-toolbar style="margin-bottom: 1px">
+    <mat-toolbar-row fxLayout.lt-sm="column center center" fxLayoutAlign="center center" style="height: 100%">
+      <a id="idLogoPath2" *ngIf="!cabecalhoService.hideCabecalho" [routerLink]="['/home']">
+        <img [src]="logoPath">
+      </a>
+      <a id="idLogoPath1" *ngIf="cabecalhoService.hideCabecalho">
+        <img [src]="logoPath">
+      </a>
+
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayout.lt-md="column" fxFlex>
+
+        <div id="idTitle" class="title" fxLayout="column" fxFlex>
+          <div fxLayoutAlign="start end" fxFlex="65">{{title}}</div>
+          <div fxLayoutAlign="start end" fxFlex>
+            <ol class="breadcrumb mat-body-1" fxLayout.lt-sm="column">
+              <li *ngFor="let breadcrumb of cabecalhoService.breadcrumbs" class="breadcrumb-item">
+                <a id="idBreadcrump1" *ngIf="breadcrumb.url" [routerLink]="[breadcrumb.url]">{{ breadcrumb.label }}</a>
+                <span id="idBreadcrump2" *ngIf="!breadcrumb.url">{{ breadcrumb.label }}</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div id="idCabecalho" class="info-usuario" *ngIf="cabecalhoService.usuario" fxLayout="column"
+          fxLayoutAlign="start end">
+
+          <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center end" *ngIf="!cabecalhoService.hideCabecalho">
+            <div fxLayout="column">
+              <span id="idNomeIpn" class="info-usuario mat-body-2" fxLayoutAlign="end">
+                <mat-icon color="accent"><a *ngIf="cabecalhoService.usuario.perfil.descricao !== 'Administrador'"
+                    class="login" [routerLink]="'/usuario/editar/'+cabecalhoService.usuario.ipn">vpn_key</a></mat-icon>
+                &nbsp;&nbsp;{{cabecalhoService.usuario.nome}} ({{cabecalhoService.usuario.ipn}})
+              </span>
+              <span id="idDescricao" class="mat-body-1"
+                fxLayoutAlign="end">{{cabecalhoService.usuario.perfil.descricao}}<span
+                  *ngIf="cabecalhoService.usuario.tier1">({{cabecalhoService.usuario.tier1.codigo}})</span></span>
+            </div>
+            <button id="botaoSair" class="sair mat-elevation-z0" mat-mini-fab color="white" type="submit"
+              (click)="logout()">Sair</button>
+          </div>
+
+          <div id="idCodigoUsinaDescricao" class="mat-body-1" *ngIf="!cabecalhoService.hideUsinas" fxLayoutAlign="end">
+            <div *ngIf="cabecalhoService.quantidadeUsina">
+              <mat-form-field>
+                <mat-select id="idSelectUsina1" [formControl]="cabecalhoService.usinaCtrl"
+                  [compareWith]="generalComparator" [(ngModel)]="cabecalhoService.usina"
+                  (change)="selecionarUsina($event)">
+                  <mat-option *ngFor="let usina of cabecalhoService.usuario.usinas" [value]="usina">{{usina.codigo}} -
+                    {{usina.descricao}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div *ngIf="!cabecalhoService.quantidadeUsina && undefined !== cabecalhoService.usina">
+              <mat-form-field>
+                <input id="idSelectUsina2" matInput readonly="Usina"
+                  [value]="cabecalhoService.usina.codigo + ' - ' + cabecalhoService.usina.descricao">
+              </mat-form-field>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <router-outlet></router-outlet>
+
+</div>-->

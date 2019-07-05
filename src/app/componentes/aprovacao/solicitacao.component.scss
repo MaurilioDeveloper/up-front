@@ -1,0 +1,25 @@
+.solicitacao-container {
+    height: 140px;
+    width: 100%;
+    overflow: auto;
+}
+  table {
+    width: 100%;
+  }
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  .mat-header-row {
+    background: #6b69d0;
+  }
+  .mat-header-cell {
+    color: white;
+  }
+  .header-card {
+    background: #6b69d0;
+    color: white;
+  }
+
+  button:disabled {
+    background: #ced1d6 !important;
+  }

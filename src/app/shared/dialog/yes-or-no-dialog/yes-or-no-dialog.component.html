@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content>
+  <section class="mat-typography">
+    <h3 subheading-2>{{message}}</h3>
+  </section>
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayoutAlign="center center">
+    <button id="botaoNao" mat-raised-button class="btn btn-primary" (click)="no()">Não</button>
+    <button id="botaoSim" mat-raised-button class="btn btn-success" (click)="yes()">Sim</button>
+</mat-dialog-actions>

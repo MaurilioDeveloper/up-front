@@ -1,0 +1,28 @@
+<mat-toolbar id="header" style="height: 45px">
+    <a id="idLogoPath2"  [routerLink]="['/home']">
+      <img [src]="logoPath" width="75%">
+    </a>
+
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayout.lt-md="column" fxFlex>
+
+      <div id="idTitle" class="title" fxLayout="column" fxFlex>
+        <div fxLayoutAlign="start end" fxFlex="65"></div>
+        <div fxLayoutAlign="start end" fxFlex>
+          
+        </div>
+      </div>
+      <div id="idCabecalho" class="info-usuario" fxLayout="column" fxLayoutAlign="start end">
+
+        <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+          <div fxLayout="column">
+            <span id="descricaoUsuario" class="mat-body-1 white" fxLayoutAlign="end" >Bem-Vindo, Usuario Positivo</span>
+          </div>
+          <button mat-button class="btn-info sair" type="submit" (click)="loginService.logout()">Sair</button>
+        </div>
+
+      </div>
+
+    </div>
+
+</mat-toolbar>
+

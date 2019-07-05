@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="login" id="loginAluno">
+    <div id="logo"></div>
+    <div class="bem-vindo">Seja bem-vindo!</div>
+    <!-- <p class="bem-vindo">Por favor identifique-se.</p> -->
+
+    <form id="frmLoginAluno" #loginForm="ngForm" novalidate>
+      <p>
+      </p><div class="user-login">
+        <input type="text" name="username" id="username" placeholder="Usuario" [(ngModel)]="usuario.username" required>
+      </div>
+      <p></p>
+      <p>
+      </p><div class="lock-login">
+        <input type="password" name="password" id="password" placeholder="Senha" [(ngModel)]="usuario.password" required>
+      </div>
+      <p></p>
+      <p class="submit">
+          <button mat-button id="sendCredentials" [disabled]="!loginForm.form.valid" (click)="loginService.login()">Entrar</button>
+          <!-- <button mat-button class="btn btn-primary" [disabled]="!loginForm.form.invalid" (click)="loginService.login()">Entrar</button> -->
+        <!-- <button [disabled]="!loginForm.form.invalid" (click)="loginService.login()" id="sendCredentials" title="Clique para autenticar">Entrar</button> -->
+        <!-- <input [disabled]="!loginForm.form.invalid" (click)="loginService.login()" type="submit" name="sendCredentials" id="sendCredentials" value="Entrar" title="Clique para autenticar"> -->
+      </p>
+      <p class="submit">
+          <!-- <button style="width: 100%" mat-button class="btn btn-primary" (click)="loginService.login()"><img src="../../../assets/images/icon-windows.ico" width="20px" height="20px"/> ENTRAR CONTA WINDOWS</button> -->
+      </p>
+
+      <div id="helpmsg" class="helpmsg">
+        <br>
+        <hr>Informe seu usuário e senha da Secretaria para prosseguir.</div>
+      </form>
+  </div>
+</div>
