@@ -31,7 +31,7 @@
     "core-js": "^2.5.4",
     "file-saver": "^2.0.2",
     "iv-viewer": "^2.0.0",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.5.1",
     "ng2-image-viewer": "^3.0.4",
     "ngx-toastr": "^10.0.4",
     "rxjs": "~6.3.3",
